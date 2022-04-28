@@ -1,0 +1,10 @@
+{
+  "name": "mimotic/com",
+  "authors": [{
+    "name": "mimotic",
+    "email": "hello@mimotic.com"
+  }],
+  "require": {
+    "vlucas/phpdotenv": "^5.4"
+  }
+}
