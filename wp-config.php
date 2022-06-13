@@ -107,7 +107,7 @@ if (dotEnvReader('SITE_ENVIROMENT') === 'production') { // production server
     define('FORCE_SSL_LOGIN', true);
 
     // debug
-    define('WP_DEBUG', false);
+    define('WP_DEBUG', true);
     define('SCRIPT_DEBUG', false);
     @ini_set('display_errors', 0);
     define( 'WP_DEBUG_LOG', __DIR__ . '/logs/wp-production-debug.log' );
