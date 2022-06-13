@@ -110,7 +110,7 @@ if (dotEnvReader('SITE_ENVIROMENT') === 'production') { // production server
     define('WP_DEBUG', false);
     define('SCRIPT_DEBUG', false);
     @ini_set('display_errors', 0);
-    define('WP_DEBUG_LOG', false);
+    define( 'WP_DEBUG_LOG', __DIR__ . '/logs/wp-production-debug.log' );
     define('WP_DEBUG_DISPLAY', false);
     define('SAVEQUERIES', false);
     if (!defined('WP_CACHE')) {
@@ -123,11 +123,10 @@ if (dotEnvReader('SITE_ENVIROMENT') === 'production') { // production server
     define('FORCE_SSL_ADMIN', true);
     define('FORCE_SSL_LOGIN', true);
 
-
     // debug
     define('WP_DEBUG', true);
     define('SCRIPT_DEBUG', true);
-    define('WP_DEBUG_LOG', true);
+    define( 'WP_DEBUG_LOG', __DIR__ . '/logs/wp-staging-debug.log' );
     define('WP_DEBUG_DISPLAY', true);
     define('SAVEQUERIES', true);
 
@@ -138,11 +137,10 @@ if (dotEnvReader('SITE_ENVIROMENT') === 'production') { // production server
     define('FORCE_SSL_ADMIN', false);
     define('FORCE_SSL_LOGIN', false);
 
-
     // debug
     define('WP_DEBUG', true);
     define('SCRIPT_DEBUG', true);
-    define('WP_DEBUG_LOG', true);
+    define( 'WP_DEBUG_LOG', __DIR__ . '/logs/wp-local-debug.log' );
     define('WP_DEBUG_DISPLAY', true);
     define('SAVEQUERIES', true);
 }
