@@ -36,7 +36,7 @@ You should update `.env` properly. In dev should be
 DB_NAME=mimoticdb
 DB_USER=mimoticdbu
 DB_PASSWORD=passpass
-DB_HOST=dba
+DB_HOST=db
 DB_PORT=3306
 TABLE_PREFIX=OHIGT39G3852_
 SITE_ENVIROMENT=http://localhost:8080
