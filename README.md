@@ -71,3 +71,11 @@ $ docker-compose exec php bash -c "cd public && pwd && wp --info"
 ```
 $ docker exec -it scaffolding-wp-php-1 bash
 ```
+
+
+## Add this to your functions.php file for extra security configuration
+
+```
+require dirname(ABSPATH) . '/mu-scripts/init.php';
+```
+
