@@ -73,5 +73,7 @@ public/wp-content/uploads/essential-addons-elementor/
 # Cache
 public/wp-content/cache/
 public/wp-content/uploads/ithemes-security
+# Divi
+public/wp-content/et-cache/
 
 importer/dist
