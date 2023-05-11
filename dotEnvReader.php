@@ -1,8 +1,14 @@
 <?php
+/**
+ * Dot.env reader - v2
+ * required "vlucas/phpdotenv": "^5.1"
+ */
 require_once(__DIR__ . '/vendor/autoload.php');
 
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
+
+// (new Dotenv\Dotenv(__DIR__))->load();
 
 if (! function_exists('dotEnvReader')) {
     /**
