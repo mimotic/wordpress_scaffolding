@@ -54,10 +54,10 @@ $ docker-compose up --build
 
 ### 1.4. Run cache and rewrite clear for first time use
 ```bash
-$ docker exec mimoticcom-mimotic.test-1 wp rewrite flush --path=public
+$ docker exec scaffolding-wp-mimotic.test-1 wp rewrite flush --path=public
 ```
 ```bash
-$ docker exec smimoticcom-mimotic.test-1 wp cache flush --path=public
+$ docker exec scaffolding-wp-mimotic.test-1 wp cache flush --path=public
 ```
 
 ### 1.5. Launch Project
@@ -95,15 +95,15 @@ include /home/user/site/nginx/after/*;
   `$ ./sh/boot.sh`
 
 - Container Name for this project:
-`mimoticcom-mimotic.test-1`
+`scaffolding-wp-mimotic.test-1`
 
 - Shutdown Containers
 `$ docker-compose down`
 
 - Open Docker BASH:
-`$ docker exec -itblog-mimotic.test-1 bash`
+`$ docker exec -it scaffolding-wp-mimotic.test-1 bash`
 - WP CLI:
-`$ docker exec --user=mimotic -itw /var/www/html/public/ blog-mimotic.test-1 sh -c "wp"`
+`$ docker exec --user=mimotic -itw /var/www/html/public/ scaffolding-wp-mimotic.test-1 sh -c "wp"`
 
 ### DEPLOYMENT CI/CD
 - Needs repository write permission
@@ -137,11 +137,11 @@ echo 'Restarting FPM...'; sudo -S service $FORGE_PHP_FPM reload ) 9>/tmp/fpmlock
 ## wp-cli:
 
 ```bash
-$ docker exec mimoticcom-mimotic.test-1 wp --info --path=public
+$ docker exec scaffolding-wp-mimotic.test-1 wp --info --path=public
 ```
 OR
 ```bash
-$ docker-compose exec mimoticcom-mimotic.test-1 bash -c "wp --info --path=public"
+$ docker-compose exec scaffolding-wp-mimotic.test-1 bash -c "wp --info --path=public"
 ```
 
 ---
