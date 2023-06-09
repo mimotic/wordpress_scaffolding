@@ -91,8 +91,10 @@ public/wp-content/uploads/ithemes-security
 
 importer/dist
 
-#allow env example
+# allow env example
 !.env.example
 
-#Wordpress
+# Wordpress
 public/wp-content/uploads/wc-logs/
+# Divi cache
+/et-cache/
