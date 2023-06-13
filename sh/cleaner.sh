@@ -4,6 +4,9 @@ cd ${route}
 
 cd public
 
+wp revisions clean
+wp comment delete $(wp comment list --status=spam --format=ids)
+
 wp yoast index
 wp cache flush
 wp rewrite flush
