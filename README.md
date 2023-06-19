@@ -3,8 +3,6 @@
 
 ## About this Wordpress Scaffolding 
 
----
-
 This application is made with Wordpress and elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Mimotic takes the pain out of development by easing common tasks used in many web projects.
 
 ❤️ love every bit
@@ -19,8 +17,6 @@ This application is made with Wordpress and elegant syntax. We believe developme
 > ⚠️ Contributors must follow setup instructions to ensure the same behavior as production
 
 ## ⭐ Install and setup Project:
-
----
 
 ## 0. Download Repository
 ### 0.1. clone project
