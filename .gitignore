@@ -87,6 +87,9 @@ public/wp-content/debug.log
 public/wp-content/uploads/essential-addons-elementor/
 public/wp-content/uploads/elementor/
 
+# Pum css
+public/wp-content/uploads/pum/
+
 # Cache
 public/wp-content/cache/
 public/wp-content/uploads/ithemes-security
@@ -96,7 +99,8 @@ importer/dist
 # allow env example
 !.env.example
 
-# Wordpress
+# Wordpress and plugins noise
 public/wp-content/uploads/wc-logs/
+
 # Divi cache
 /et-cache/
