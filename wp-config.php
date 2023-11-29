@@ -87,7 +87,7 @@ if(dotEnvReader('SITE_ENVIROMENT') === 'production'){ // production server
     define( 'COMPRESS_SCRIPTS',    true );
     define( 'CONCATENATE_SCRIPTS', true );
     define( 'ENFORCE_GZIP',        true );
-}else if(dotEnvReader('SITE_ENVIROMENT') === 'stagin'){
+}else if(dotEnvReader('SITE_ENVIROMENT') === 'staging'){
     //ssl
     define('FORCE_SSL_ADMIN', true);
     define('FORCE_SSL_LOGIN', true);
