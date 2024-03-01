@@ -104,3 +104,6 @@ public/wp-content/uploads/wc-logs/
 
 # Divi cache
 /et-cache/
+
+#WPML cache
+public/wp-content/uploads/cache/
