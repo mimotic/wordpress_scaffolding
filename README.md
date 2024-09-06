@@ -1,9 +1,9 @@
 <p align="center"><a href="https://mimotic.com" target="_blank"><img src="https://mimotic.com/wp-content/themes/mimotic/assets/img/logo.svg" width="200" alt="Mimotic Logo"></a></p>
 
 
-## About this Wordpress Scaffolding 
+## About this WordPress Scaffolding 
 
-This application is made with Wordpress and elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Mimotic takes the pain out of development by easing common tasks used in many web projects.
+This application is made with WordPress and elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Mimotic takes the pain out of development by easing common tasks used in many web projects.
 
 ❤️ love every bit
 

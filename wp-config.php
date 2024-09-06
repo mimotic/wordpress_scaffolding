@@ -205,7 +205,7 @@ if (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROT
 }
 
 /* ¡Eso es todo, deja de editar! Feliz blogging */
-/** WordPress absolute path to the Wordpress directory. */
+/** WordPress absolute path to the WordPress directory. */
 if (!defined('ABSPATH')) {
     define('ABSPATH', dirname(__FILE__) . '/');
 }
