@@ -1,4 +1,4 @@
-<p align="center"><a href="https://mimotic.com" target="_blank"><img src="https://mimotic.com/wp-content/themes/mimotic/assets/img/logo.svg" width="200" alt="Mimotic Logo"></a></p>
+<p align="center"><a href="https://mimotic.com" target="_blank"><img src="https://mimotic.com/wp-content/uploads/2024/09/logo_mimotic.svg" width="200" alt="Mimotic Logo"></a></p>
 
 
 ## About this WordPress Scaffolding 
