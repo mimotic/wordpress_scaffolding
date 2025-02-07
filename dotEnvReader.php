@@ -19,6 +19,10 @@ if (! function_exists('dotEnvReader')) {
      * @return mixed
      */
     function dotEnvReader($key, $default = null) {
+        if (!isset($_ENV[$key])) {
+            return $default;
+        }
+
         $value = $_ENV[$key];
 
         if ($value === false) {
