@@ -16,6 +16,9 @@ wp language plugin update --all
 
 wp wc update
 
+git config --global user.name bot
+git config --global user.email bot@mimotic.com
+
 git add -A
 git commit -m 'server wordpress autoupdates'
 git push
