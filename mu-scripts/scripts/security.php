@@ -6,6 +6,21 @@ add_filter( 'rest_authentication_errors', function( $result ) {
     if ( ! empty( $result ) ) {
         return $result;
     }
+
+    $allowed_routes = array(
+        '/wp-json/contact-form-7',
+        '/wp-json/wp/v2/contact-form-7'
+    );
+
+    $url = $_SERVER['REQUEST_URI'];
+    $path = parse_url($url, PHP_URL_PATH); //remove get parameters preventing false positives
+
+    foreach ($allowed_routes as $route) {
+        if (strpos($path, $route) !== false) {
+            return $result;
+        }
+    }
+
     if ( ! is_user_logged_in() ) {
         return new WP_Error( 'rest_not_logged_in', 'You are not currently logged in.', array( 'status' => 401 ) );
     }
