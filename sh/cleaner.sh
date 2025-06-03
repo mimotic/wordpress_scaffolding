@@ -8,8 +8,11 @@ wp revisions clean
 wp comment delete $(wp comment list --status=spam --format=ids)
 
 wp yoast index
+
+wp transient delete --expired
 wp cache flush
 wp rewrite flush
+
 
 git add -A
 git commit -m 'server wordpress cleaner'

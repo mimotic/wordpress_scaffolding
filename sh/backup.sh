@@ -10,6 +10,7 @@ wp db dump --path=../../public --porcelain db.sql
 
 git config --global user.name bot
 git config --global user.email bot@mimotic.com
+git config --global core.editor vi
 
 git add db.sql -f
 git commit -m 'database server backup'

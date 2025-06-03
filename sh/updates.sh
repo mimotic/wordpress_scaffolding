@@ -18,6 +18,7 @@ wp wc update
 
 git config --global user.name bot
 git config --global user.email bot@mimotic.com
+git config --global core.editor vi
 
 git add -A
 git commit -m 'server wordpress autoupdates'
