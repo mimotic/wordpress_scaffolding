@@ -1,0 +1,9 @@
+.two-factor-methods-table tbody th,
+.two-factor-methods-table tbody td {
+	vertical-align: top;
+}
+
+.two-factor-methods-table .two-factor-method-label {
+	display: block;
+	font-weight: 700;
+}
