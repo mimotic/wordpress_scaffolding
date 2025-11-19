@@ -64,14 +64,7 @@ Now you can open your browser on ```http://localhost/```
 ## 2. Development
 ### Theme Setup
 
-- Link mimotic's scaffolding mu-scripts to enhance security
-
-```php
-/**
- * Custom security functions.
- */
-require dirname(ABSPATH) . '/mu-scripts/init.php';
-```
+- Security helpers are loaded automatically through the mu-plugin `public/wp-content/mu-plugins/mimotic-security.php`, which requires `mu-scripts/init.php` on every request. Keep that file in place (and the `mu-scripts/` directory at the project root) so security tweaks stay active even if the theme changes.
 
 - Link mimotic Nginx server config, please change user and site with proper config
 
