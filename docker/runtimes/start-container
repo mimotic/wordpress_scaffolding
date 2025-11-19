@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+set -e
+
+WWWUSER=${WWWUSER:-1000}
+WWWGROUP=${WWWGROUP:-1000}
+CONTAINER_USER=mimotic
+
+if [ "$(id -u ${CONTAINER_USER})" != "${WWWUSER}" ]; then
+    usermod -u "${WWWUSER}" "${CONTAINER_USER}"
+fi
+
+if [ "$(id -g ${CONTAINER_USER})" != "${WWWGROUP}" ]; then
+    groupmod -g "${WWWGROUP}" "${CONTAINER_USER}"
+fi
+
+chown -R "${CONTAINER_USER}:${CONTAINER_USER}" /home/${CONTAINER_USER}
+
+exec /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf

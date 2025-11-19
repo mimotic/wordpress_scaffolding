@@ -25,113 +25,70 @@ At least needs repository read permissions
 git clone git@bitbucket.org:mimotic/scaffolding-wp.git
 cd scaffolding-wp
 ```
-## 1. Setup 
-### 1.1. create environment file
-Copy `.env.example` to `.env` and fill fields.
+## 1. Setup
+
+### 1.1 Copy and configure `.env`
 ```bash
-$ cp .env.example .env
+cp .env.example .env
+```
+Update credentials plus the runtime block:
+```
+PHP_VERSION=8.4   # Supported: 8.1 / 8.2 / 8.3 / 8.4
+NODE_VERSION=20   # Bundled Node version
+WWWUSER=1000      # Host UID (prevents permission issues)
+WWWGROUP=1000     # Host GID
+```
+> Need an older PHP (7.x/5.x) runtime for a legacy site? Fork the Dockerfile and install those packages explicitly—this scaffold focuses on actively supported versions only.
+> WordPress uses MySQL 8 (`mysql/mysql-server:8.0`) as the bundled database; Postgres is not included.
+
+### 1.2 Build and start the stack
+```bash
+docker compose up -d --build
+```
+This single command provisions nginx, PHP-FPM, MySQL 8, Composer, Node.js, npm, and WP-CLI for the chosen PHP version.
+
+### 1.3 Install PHP dependencies inside the container
+```bash
+docker compose exec mimotic.test composer install --ignore-platform-reqs
 ```
 
-### 1.2. Build Docker Project from scratch
-This command will install: nginx, php, mysql, composer, node and npm for you 
+### 1.4 Install theme assets (as needed)
+Enter the container and install/build from your active theme directory:
 ```bash
-$ docker-compose up --build
+docker compose exec mimotic.test bash -lc "cd public/wp-content/themes/<theme> && npm install && npm run dev"
 ```
 
-### 1.3. Install composer dependencies inside docker
-
+### 1.5 (First run) Flush rewrites and cache
 ```bash
-    docker run --rm \
-        -u "$(id -u):$(id -g)" \
-        -v $(pwd):/var/www/html \
-        -w /var/www/html \
-        composer install --ignore-platform-reqs
+docker compose exec mimotic.test wp rewrite flush --path=public
+docker compose exec mimotic.test wp cache flush --path=public
 ```
 
-### 1.4. Run cache and rewrite clear for first time use
-```bash
-$ docker exec scaffolding-wp-mimotic.test-1 wp rewrite flush --path=public
-```
-```bash
-$ docker exec scaffolding-wp-mimotic.test-1 wp cache flush --path=public
-```
-
-### 1.5. Launch Project
-Now you can open your browser on ```http://localhost/```
+### 1.6 Browse the site
+Visit http://localhost/ once the stack is healthy.
 
 ---
 
 ## 2. Development
+
 ### Theme Setup
+- Security helpers load via the mu-plugin `public/wp-content/mu-plugins/mimotic-security.php`, which requires `mu-scripts/init.php`. Keep both paths intact so security tweaks stay active even if the active theme changes.
+- Link Mimotic nginx snippets inside your host config (adjust paths for the server user/site):
+  ```yml
+  # MIMOTIC NGINX COFIGS (DO NOT REMOVE!)
+  include /home/user/site/nginx/before/*;
+  [...]
+  # MIMOTIC NGINX COFIGS (DO NOT REMOVE!)
+  include /home/user/site/nginx/after/*;
+  ```
 
-- Security helpers are loaded automatically through the mu-plugin `public/wp-content/mu-plugins/mimotic-security.php`, which requires `mu-scripts/init.php` on every request. Keep that file in place (and the `mu-scripts/` directory at the project root) so security tweaks stay active even if the theme changes.
-
-- Link mimotic Nginx server config, please change user and site with proper config
-
-```yml
-# MIMOTIC NGINX COFIGS (DO NOT REMOVE!)
-include /home/user/site/nginx/before/*;
-
-[...]
-  
-# MIMOTIC NGINX COFIGS (DO NOT REMOVE!)
-include /home/user/site/nginx/after/*;
-```
-
-### Other Usefull info and commands
-
-- All before steps together in one command:
-  `$ ./sh/boot.sh`
-
-- Container Name for this project:
-`scaffolding-wp-mimotic.test-1`
-
-- Shutdown Containers
-`$ docker-compose down`
-
-- Open Docker BASH:
-`$ docker exec -it scaffolding-wp-mimotic.test-1 bash`
-- WP CLI:
-`$ docker exec --user=mimotic -itw /var/www/html/public/ scaffolding-wp-mimotic.test-1 sh -c "wp"`
-
-### DEPLOYMENT CI/CD
-- Needs repository write permission
-
-- Autodeploy on push development or production branch
-
-- Check deploy script compile all assets for production:
-
-```bash
-cd /home/user/site
-git pull origin $FORGE_SITE_BRANCH
-
-$FORGE_COMPOSER install --no-interaction --prefer-dist --optimize-autoloader
-
-cd /home/user/site/public/wp-content/themes/theme
-
-npm install
-npm run prod
-
-wp cache flush
-
-cd /home/user/site
-
-( flock -w 10 9 || exit 1
-echo 'Restarting FPM...'; sudo -S service $FORGE_PHP_FPM reload ) 9>/tmp/fpmlock
-
-```
-
----
-
-## wp-cli:
-
-```bash
-$ docker exec scaffolding-wp-mimotic.test-1 wp --info --path=public
-```
-OR
-```bash
-$ docker-compose exec scaffolding-wp-mimotic.test-1 bash -c "wp --info --path=public"
-```
+### Common commands
+- Bootstrap everything in one go: `./sh/boot.sh`
+- Rebuild containers: `docker compose up -d --build`
+- SSH into the runtime: `docker compose exec mimotic.test bash`
+- Run WP-CLI from the project root: `docker compose exec mimotic.test wp --path=public <command>`
+- Run WP-CLI from inside `public/`: `docker compose exec --user=mimotic -w /var/www/html/public mimotic.test wp <command>`
+- Stop the stack: `docker compose down`
 
 ---
 
