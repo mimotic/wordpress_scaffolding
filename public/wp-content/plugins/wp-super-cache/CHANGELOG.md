@@ -5,23 +5,203 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.9.5-alpha] - unreleased
-
-This is an alpha version! The changes listed here are not final.
-
-## [1.9.4] - 2023-03-02
+## [3.0.3] - 2025-11-11
 ### Added
-- Added a check to ensure preload cronjobs exist when updating preload settings. [#28545]
+- Tested up to WordPress 6.9. [#45571]
+
+### Changed
+- Update package dependencies. [#45478] [#45652]
+
+### Fixed
+- Phan: Address PhanRedundantCondition, PhanRedundantArrayValuesCall, and PhanPluginRedundantAssignment violations. [#45681]
+- Remove redundant code. [#45733]
+
+## [3.0.2] - 2025-10-10
+### Added
+- Add typecheck support for E2E tests. [#44788]
+
+### Changed
+- Update package dependencies. [#44725] [#44873] [#44898] [#45096] [#45097] [#45159]
+- Use `wp_rand()` instead of `rand()` and `mt_rand()`. [#44964]
+
+### Fixed
+- Code: Resolve PhanImpossibleCondition violations. [#44869]
+
+## [3.0.1] - 2025-08-05
+### Added
+- Caching: Ignore Yandex parameters so those visitors are served from the cache. [#44618]
+
+### Changed
+- Update package dependencies. [#44206] [#44506]
+
+## [3.0.0] - 2025-06-10
+### Changed
+- Code: First pass of style coding standards. [#42734]
+- Update package dependencies. [#43425] [#43766] [#43839]
+
+### Removed
+- General: Update minimum WordPress version to 6.7. [#43192]
+
+### Fixed
+- Code: Update stylesheets to use hex instead of named colors. [#42920]
+- General: Improve WP CLI support by making variables global. [#43286]
+- Linting: Fix more Stylelint violations. [#43213]
+
+## [2.0.1] - 2025-04-04
+### Changed
+- Code: Use function-style `exit()` and `die()` with a default status code of 0. [#41167]
+- Update package dependencies. [#40980] [#41659] [#42180] [#42308] [#42762] [#42815]
+
+## [2.0.0] - 2025-01-10
+### Added
+- Enable test coverage. [#39961]
+
+### Changed
+- General: Indicate compatibility with the upcoming version of WordPress - 6.7. [#39786]
+- Update package dependencies. [#38822] [#38870] [#39004] [#39278] [#39288] [#39653] [#40116] [#40515]
+
+### Removed
+- Cleaned up legacy code. [#40200]
+- General: Update minimum PHP version to 7.2. [#40147]
+- General: Update minimum WordPress version to 6.6. [#40146]
+
+### Fixed
+- Caching: make sure there is cache content to serve, even if the cache file was found [#40342]
+- Ensure homepage cache gets flushed when a post is unpublished. [#40879]
+- Lossless image optimization for images (should improve performance with no visible changes). [#38750] [#38981]
+- Move trailing space out of i18n message. [#39305]
+- Fix apache_request_headers fallback so it works when that command is disabled. [#39951]
+
+## [1.12.4] - 2024-07-17
+### Removed
+- General: update WordPress version requirements to WordPress 6.5. [#38382]
+
+### Fixed
+- Fixed problem with is_utf8_charset missing in WP 6.6 [#38383]
+
+## [1.12.3] - 2024-07-10
+### Fixed
+- Don't delete the log viewer when doing garbage collection [#38276]
+- Fix clearing the cache when scheduled posts are published [#38263]
+
+## [1.12.2] - 2024-06-27
+### Added
+- add an admin notice to encourage migration to Jetpack Boost [#37933]
+- modify boost install code so it can be used by multiple buttons [#37824]
+- notify Boost of migration to that plugin [#37797]
+
+### Changed
+- General: indicate compatibility with the upcoming version of WordPress - 6.6. [#37962]
+- tell user that Cache module of Boost must be deactivated to use WPSC [#37265]
+- WP Updated banner designs, added auto-install Jetpack Boost buttons [#37963]
+
+### Fixed
+- Detect when WP_CACHE is defined with "const" in wp-config.php [#38022]
+- Align detection of Boost installs with activation of that plugin [#37896]
+- create the cache directory before creating the config file [#38028]
+- do not show migration notice if already using Boost Cache [#38005]
+- fixed a PHP warning when deactivating the plugin. [#37968]
+- make sure plugins links is an array before using it. [#37604]
+- remove the preload interval based on the post count. Preload as often as you want. [#37618]
+- renamed WPSC_VERSION because it conflicted with other plugins [#38007]
+
+## [1.12.1] - 2024-05-09
+### Changed
+- General: update WordPress version requirements to WordPress 6.4. [#37047]
+- General: use wp_admin_notice function introduced in WP 6.4 to display notices. [#37051]
+
+### Fixed
+- Fix the CDN functionality when cache is disabled [#37112]
+- Do not define DONOTCACHEPAGE if it is already defined [#36423]
+
+## [1.12.0] - 2024-03-11
+### Added
+- Setup: Detect Jetpack Boost cache and suggest troubleshooting steps [#36018]
+- WP Super Cache: added WPSC_PRELOAD_POST_INTERVAL and WPSC_PRELOAD_LOOP_INTERVAL to modify preload timings [#36246]
+
+### Changed
+- Code Modernization: Replace usage of strpos() with str_contains() [#34137]
+- Code Modernization: Replace usage of strpos() with str_starts_with(). [#34135]
+- Code Modernization: Replace usage of substr() with str_starts_with() and str_ends_with(). [#34207]
+- Fix blurry Automattic logo. [#34985]
+- General: avoid deprecation warnings when trying to get URLs in PHP 8.2 [#34962]
+- General: indicate compatibility with the upcoming version of WordPress, 6.5. [#35820]
+- General: updated PHP requirement to PHP 7.0+ [#34126]
+- General: update WordPress version requirements to WordPress 6.3. [#34127]
+- WP Super Cache: check for Boost Cache when creating advanced-cache.php [#36027]
+- WP Super Cache: fixed labels on advanced settings page [#36067]
+- WP Super Cache: remove notifications that preload started working again. [#35960]
+
+### Fixed
+- Supercache: add "days" to "Next preload scheduled" message. [#34509]
+- Super Cache: with rebuild enabled, apply that to subdirectories instead of deleting them. [#35032]
+- WP Super Cache - fix the wp_super_cache_clear_post_cache filter so the homepage cache isn't deleted too. [#36069]
+- WP Super Cache: bail if the request uri isn't set. It means the plugin isn't configured yet. [#36024]
+- WP Super Cache: don't create an output buffer if there's already one active [#36124]
+- WP Super Cache: fixed serving a cached page on POST with late init enabled. [#36211]
+- WP Super Cache: fix the output buffer check, and make debug logs pre-formatted. [#36158]
+- WP Super Cache: if the preload number of posts is not in the list, then add it [#36249]
+
+## [1.11.0] - 2023-11-08
+### Added
+- Super Cache: fix "accept header" check, and add new "wpsc_accept_headers" filter on accept header list [#33972]
+
+### Changed
+- General: indicate full compatibility with the latest version of WordPress, 6.4. [#33776]
+- General: update WordPress version requirements to WordPress 6.2. [#32762]
+- Overhauled visual styling to match Jetpack branding [#32981]
+- Updated package dependencies. [#32307]
+- Updated package dependencies. [#32605]
+- Updated package dependencies. [#32966]
+- Updated package dependencies. [#33498]
+
+### Fixed
+- Caching: make sure $wp_cache_request_uri is defined to avoid warnings about "NULL" parameters. [#32629]
+- super-cache: fixed null parameter warning when using $supercachedir [#33970]
+- Super Cache: cancel the full preload job correctly. [#33560]
+
+## [1.10.0] - 2023-08-16
+### Added
+- Caching: Added support for the 'Accept' HTTP Header. Prevent caching JSON content. [#29456]
+- Preload: Improved preload notification panel shows the last 5 preloaded URLs. [#31017]
+
+### Changed
+- General: Indicate full compatibility with the latest version of WordPress, 6.3. [#31910]
+- General: Update Boost install / activate card styles. [#31311]
+- General: Update documentation links to point to Jetpack.com docs. [#32164]
+- General: Update the contributors list. [#29241]
+- Preload: Faster and more robust preloading slower hosts. [#30450]
+
+### Removed
+- Cleanup: Removes unwanted development environment files from production version of the plugin. [#30216]
+- Cleanup: Remove unused "object cache" code. [#31783]
+
+### Fixed
+- Cache Compression: Fix PHP warning appearing in gzip output stream. [#31487]
+- Caching: Reject unknown or malformed URIs to prevent PHP warnings. [#31786]
+- Dynamic Caching: Fixed incorrect encoding headers when using dynamic caching with compression. [#32106]
+- Setting page: Fixed boost banner getting oversized when zoomed out
+- General: Fix incorrect Debug Log URL for nested WordPress installations. [#29985]
+- General: Fix links to cache directory on sites that are in a sub directory. [#30872]
+- General: Updated Nginx documentation hyperlink. [#31420]
+- Preload: No longer deletes child taxonomies during preload. [#30830]
+- Preload: Use a constant instead of hard-coded email numbers in preload dropdown. [#30713]
+- Caching: Prevent Super Cache from attempting to gunzip content which is not zipped
+- General: Fix null/false warning in PHP8.1
+
+## [1.9.4] - 2023-02-28
+### Added
 - Added new filter which controls cache clearing on post edit. [#28556]
+- Added a check to ensure preload cronjobs exist when updating preload settings. [#28545]
 
 ### Changed
 - Updated contributors list. [#28891]
 
 ### Fixed
-- Fixed deprecation warnings on PHP 8.1+. [#28959]
 - Fixed undefined PHP variable when trying to delete a protected folder. [#28524]
+- Fixed deprecation warnings on PHP 8.1+. [#28959]
 
-## [1.9.3-beta] - 2023-01-23
+## [1.9.3] - 2023-01-23
 ### Added
 - Added new filters to set mod_expires rules and HTTP headers in the cache htaccess file. [#28031]
 
@@ -29,7 +209,7 @@ This is an alpha version! The changes listed here are not final.
 - Fixed an issue that caused wp-config.php file permissions to change. [#28164]
 - Fixed missing missing action 'wp_cache_cleared' when clearing the cache on post update. [#28481]
 
-## [1.9.2-beta] - 2022-12-09
+## [1.9.2] - 2022-12-09
 ### Added
 - Added a dismissable option to install Jetpack Boost. [#26702]
 - Improved stability with the start of an end-to-end test suite. [#26462]
@@ -651,10 +831,22 @@ This is an alpha version! The changes listed here are not final.
 
 Misc fixes
 
-[1.9.5-alpha]: https://github.com/Automattic/wp-super-cache/compare/v1.9.4...v1.9.5-alpha
-[1.9.4]: https://github.com/Automattic/wp-super-cache/compare/v1.9.3-beta...v1.9.4
-[1.9.3-beta]: https://github.com/Automattic/wp-super-cache/compare/v1.9.2-beta...v1.9.3-beta
-[1.9.2-beta]: https://github.com/Automattic/wp-super-cache/compare/v1.9.1...v1.9.2-beta
+[3.0.3]: https://github.com/Automattic/wp-super-cache/compare/v3.0.2...v3.0.3
+[3.0.2]: https://github.com/Automattic/wp-super-cache/compare/v3.0.1...v3.0.2
+[3.0.1]: https://github.com/Automattic/wp-super-cache/compare/v3.0.0...v3.0.1
+[3.0.0]: https://github.com/Automattic/wp-super-cache/compare/v2.0.1...v3.0.0
+[2.0.1]: https://github.com/Automattic/wp-super-cache/compare/v2.0.0...v2.0.1
+[2.0.0]: https://github.com/Automattic/wp-super-cache/compare/v1.12.4...v2.0.0
+[1.12.4]: https://github.com/Automattic/wp-super-cache/compare/v1.12.3...v1.12.4
+[1.12.3]: https://github.com/Automattic/wp-super-cache/compare/v1.12.2...v1.12.3
+[1.12.2]: https://github.com/Automattic/wp-super-cache/compare/v1.12.1...v1.12.2
+[1.12.1]: https://github.com/Automattic/wp-super-cache/compare/v1.12.0...v1.12.1
+[1.12.0]: https://github.com/Automattic/wp-super-cache/compare/v1.11.0...v1.12.0
+[1.11.0]: https://github.com/Automattic/wp-super-cache/compare/v1.10.0...v1.11.0
+[1.10.0]: https://github.com/Automattic/wp-super-cache/compare/v1.9.4...v1.10.0
+[1.9.4]: https://github.com/Automattic/wp-super-cache/compare/v1.9.3...v1.9.4
+[1.9.3]: https://github.com/Automattic/wp-super-cache/compare/v1.9.2...v1.9.3
+[1.9.2]: https://github.com/Automattic/wp-super-cache/compare/v1.9.1...v1.9.2
 [1.9.1]: https://github.com/Automattic/wp-super-cache/compare/v1.9.0...v1.9.1
 [1.9.0]: https://github.com/Automattic/wp-super-cache/compare/v1.8...v1.9
 [1.8]: https://github.com/Automattic/wp-super-cache/compare/v1.7.9...v1.8

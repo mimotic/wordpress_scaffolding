@@ -29,7 +29,9 @@ require WPCACHEHOME . 'wp-cache-base.php';
 if ( '/' === $cache_path || empty( $cache_path ) ) {
 	define( 'WPSCSHUTDOWNMESSAGE', 'WARNING! Caching disabled. Configuration corrupted. Reset configuration on Advanced Settings page.' );
 	add_action( 'wp_footer', 'wpsc_shutdown_message' );
-	define( 'DONOTCACHEPAGE', 1 );
+	if ( ! defined( 'DONOTCACHEPAGE' ) ) {
+		define( 'DONOTCACHEPAGE', 1 );
+	}
 	return;
 }
 
@@ -54,8 +56,9 @@ if ( ! isset( $wp_cache_plugins_dir ) ) {
 
 // from the secret shown on the Advanced settings page.
 if ( isset( $_GET['donotcachepage'] ) && isset( $cache_page_secret ) && $_GET['donotcachepage'] == $cache_page_secret ) {
-	$cache_enabled = false;
-	define( 'DONOTCACHEPAGE', 1 );
+	if ( ! defined( 'DONOTCACHEPAGE' ) ) {
+		define( 'DONOTCACHEPAGE', 1 );
+	}
 }
 
 // Load wp-super-cache plugins
@@ -95,21 +98,40 @@ if (
 // for timing purposes for the html comments
 $wp_start_time = microtime();
 
+if ( isset( $_SERVER['REQUEST_URI'] ) ) { // Cache this in case any plugin modifies it and filter out tracking parameters.
+	// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized WordPress.Security.ValidatedSanitizedInput.MissingUnslash -- none available before WordPress is loaded. Sanitized in wp_cache_postload().
+	$wp_cache_request_uri = wpsc_remove_tracking_params_from_uri( $_SERVER['REQUEST_URI'] ); // phpcs:ignore
+
+	// $wp_cache_request_uri is expected to be a string. If running from wp-cli it will be null.
+	if ( $wp_cache_request_uri === null ) {
+		$wp_cache_request_uri = '';
+	}
+} else {
+	$wp_cache_request_uri = '';
+}
+
 // don't cache in wp-admin
 if ( wpsc_is_backend() ) {
+	if ( ! defined( 'DONOTCACHEPAGE' ) ) {
+		define( 'DONOTCACHEPAGE', 1 );
+	}
 	return true;
 }
 
 // if a cookie is found that we don't like then don't serve/cache the page
 if ( wpsc_is_rejected_cookie() ) {
-	define( 'DONOTCACHEPAGE', 1 );
-	$cache_enabled = false;
+	if ( ! defined( 'DONOTCACHEPAGE' ) ) {
+		define( 'DONOTCACHEPAGE', 1 );
+	}
 	wp_cache_debug( 'Caching disabled because rejected cookie found.' );
 	return true;
 }
 
 if ( wpsc_is_caching_user_disabled() ) {
 	wp_cache_debug( 'Caching disabled for logged in users on settings page.' );
+	if ( ! defined( 'DONOTCACHEPAGE' ) ) {
+		define( 'DONOTCACHEPAGE', 1 );
+	}
 	return true;
 }
 
@@ -121,8 +143,24 @@ if ( isset( $wp_cache_make_known_anon ) && $wp_cache_make_known_anon ) {
 // an init action wpsc plugins can hook on to.
 do_cacheaction( 'cache_init' );
 
+if ( ! $cache_enabled ) { // phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable -- set by configuration or cache_init action
+	return true;
+}
+
 // don't cache or serve cached files for various URLs, including the Customizer.
-if ( ! $cache_enabled || ( isset( $_SERVER['REQUEST_METHOD'] ) && in_array( $_SERVER['REQUEST_METHOD'], array( 'POST', 'PUT', 'DELETE' ) ) ) || isset( $_GET['customize_changeset_uuid'] ) ) {
+if ( isset( $_SERVER['REQUEST_METHOD'] ) && in_array( $_SERVER['REQUEST_METHOD'], array( 'POST', 'PUT', 'DELETE' ), true ) ) {
+	wp_cache_debug( 'Caching disabled for non GET request.' );
+	if ( ! defined( 'DONOTCACHEPAGE' ) ) {
+		define( 'DONOTCACHEPAGE', 1 );
+	}
+	return true;
+}
+
+if ( isset( $_GET['customize_changeset_uuid'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+	wp_cache_debug( 'Caching disabled for customizer.' );
+	if ( ! defined( 'DONOTCACHEPAGE' ) ) {
+		define( 'DONOTCACHEPAGE', 1 );
+	}
 	return true;
 }
 
@@ -144,8 +182,6 @@ if ( function_exists( 'add_filter' ) ) { // loaded since WordPress 4.6
 	add_filter( 'supercache_filename_str', 'wp_cache_check_mobile' );
 }
 
-$wp_cache_request_uri = wpsc_remove_tracking_params_from_uri( $_SERVER['REQUEST_URI'] ); // Cache this in case any plugin modifies it and filter out tracking parameters.
-
 if ( defined( 'DOING_CRON' ) ) {
 	// this is required for scheduled CRON jobs.
 	extract( wp_super_cache_init() ); // $key, $cache_filename, $meta_file, $cache_file, $meta_pathname
@@ -154,6 +190,6 @@ if ( defined( 'DOING_CRON' ) ) {
 
 // late init delays serving a cache file until after the WordPress init actin has fired and (most of?) WordPress has loaded.
 // If it's not enabled then serve a cache file now if possible.
-if ( ! isset( $wp_super_cache_late_init ) || ( isset( $wp_super_cache_late_init ) && false == $wp_super_cache_late_init ) ) {
+if ( ! isset( $wp_super_cache_late_init ) || 0 === $wp_super_cache_late_init ) { // phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UndefinedVariable -- the wp-cache-config.php include attempt may define this var
 	wp_cache_serve_cache_file();
 }

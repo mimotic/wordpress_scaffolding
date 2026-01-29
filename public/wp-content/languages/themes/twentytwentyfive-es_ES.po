@@ -2,12 +2,12 @@
 # This file is distributed under the same license as the Themes - Twenty Twenty-Five package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2025-04-15 14:49:10+0000\n"
+"PO-Revision-Date: 2025-11-13 16:14:19+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: GlotPress/4.0.1\n"
+"X-Generator: GlotPress/4.0.3\n"
 "Language: es\n"
 "Project-Id-Version: Themes - Twenty Twenty-Five\n"
 
@@ -23,6 +23,16 @@ msgstr "Twenty Twenty-Five hace hincapié en la sencillez y la adaptabilidad. Of
 #, gp-priority: high
 msgid "Twenty Twenty-Five"
 msgstr "Twenty Twenty-Five"
+
+#: patterns/template-home-vertical-header-blog.php
+msgctxt "Pattern title"
+msgid "Right-aligned home"
+msgstr "Inicio alineado a la derecha"
+
+#: patterns/template-archive-vertical-header-blog.php
+msgctxt "Pattern title"
+msgid "Right-aligned archive"
+msgstr "Archivo alineado a la derecha"
 
 #: patterns/template-search-text-blog.php
 msgctxt "Pattern title"
@@ -358,7 +368,7 @@ msgstr "Mediodía"
 #: styles/colors/08-midnight.json
 msgctxt "Color name"
 msgid "Accent 6"
-msgstr "Acento 6"
+msgstr "Énfasis 6"
 
 #: theme.json styles/01-evening.json styles/02-noon.json styles/03-dusk.json
 #: styles/04-afternoon.json styles/05-twilight.json styles/06-morning.json
@@ -369,7 +379,7 @@ msgstr "Acento 6"
 #: styles/colors/08-midnight.json
 msgctxt "Color name"
 msgid "Accent 5"
-msgstr "Acento 5"
+msgstr "Énfasis 5"
 
 #: theme.json styles/01-evening.json styles/02-noon.json styles/03-dusk.json
 #: styles/04-afternoon.json styles/05-twilight.json styles/06-morning.json
@@ -380,7 +390,7 @@ msgstr "Acento 5"
 #: styles/colors/08-midnight.json
 msgctxt "Color name"
 msgid "Accent 4"
-msgstr "Acento 4"
+msgstr "Énfasis 4"
 
 #: theme.json styles/01-evening.json styles/02-noon.json styles/03-dusk.json
 #: styles/04-afternoon.json styles/05-twilight.json styles/06-morning.json
@@ -402,7 +412,7 @@ msgstr "Énfasis 3"
 #: styles/colors/08-midnight.json
 msgctxt "Color name"
 msgid "Accent 2"
-msgstr "Énfasis 2"
+msgstr "Énfasis 2"
 
 #: theme.json styles/01-evening.json styles/02-noon.json styles/03-dusk.json
 #: styles/04-afternoon.json styles/05-twilight.json styles/06-morning.json
@@ -413,7 +423,7 @@ msgstr "Énfasis 2"
 #: styles/colors/08-midnight.json
 msgctxt "Color name"
 msgid "Accent 1"
-msgstr "Énfasis 1"
+msgstr "Énfasis 1"
 
 #: theme.json styles/01-evening.json styles/02-noon.json styles/03-dusk.json
 #: styles/04-afternoon.json styles/05-twilight.json styles/06-morning.json
@@ -744,6 +754,11 @@ msgstr "Archivo de foto blog"
 msgctxt "Pattern title"
 msgid "News blog archive"
 msgstr "Archivo de blog de noticias"
+
+#: patterns/template-404-vertical-header-blog.php
+msgctxt "Pattern title"
+msgid "Right-aligned 404"
+msgstr "404 alineado a la derecha"
 
 #: patterns/services-team-photos.php:50
 msgid "Man in hat, standing in front of a building."
@@ -2380,28 +2395,28 @@ msgctxt "Pattern title"
 msgid "Banner with book description"
 msgstr "Banner con la descripción del libro"
 
-#: functions.php:134
+#: functions.php:142
 msgctxt "Label for the block binding placeholder in the editor"
 msgid "Post format name"
 msgstr "Nombre del formato de publicación"
 
-#: functions.php:114
+#: functions.php:122
 msgid "A collection of post format patterns."
 msgstr "Una colección de patrones de formato de publicación."
 
-#: functions.php:113
+#: functions.php:121
 msgid "Post formats"
 msgstr "Formatos de entrada"
 
-#: functions.php:106
+#: functions.php:114
 msgid "A collection of full page layouts."
 msgstr "Una colección de diseños de página completa."
 
-#: functions.php:105
+#: functions.php:113
 msgid "Pages"
 msgstr "Páginas"
 
-#: functions.php:76
+#: functions.php:84
 msgid "Checkmark"
 msgstr "Marca de comprobación"
 

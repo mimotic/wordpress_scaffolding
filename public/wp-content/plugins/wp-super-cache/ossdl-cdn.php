@@ -1,6 +1,6 @@
 <?php
 
-/* Taken from OSSDL CDN off-linker, a plugin by W-Mark Kubacki (http://mark.ossdl.de/) and used with permission */
+/* Taken from OSSDL CDN off-linker, a plugin by W-Mark Kubacki and used with permission */
 
 if ( ! isset( $ossdlcdn ) ) {
 	$ossdlcdn = 1; // have to default to on for existing users.
@@ -141,7 +141,7 @@ function scossdl_off_rewriter( $match ) {
 		$include_dirs = scossdl_off_additional_directories();
 	}
 
-	if ( $ossdl_https && 0 === strpos( $match[0], 'https' ) ) {
+	if ( $ossdl_https && str_starts_with( $match[0], 'https' ) ) {
 		return $match[0];
 	}
 
@@ -278,6 +278,7 @@ function scossdl_off_options() {
 	$example_cdn_uri .= '/wp-includes/js/jquery/jquery-migrate.js';
 	$example_cdn_uri  = esc_url( $example_cdn_uri );
 	?>
+		<div class="wpsc-card">
 		<h3><?php _e( 'Jetpack CDN' ); ?></h3>
 		<p><?php printf(
 			__( 'The free %1$sJetpack plugin%2$s has a %3$sSite Accelerator%2$s feature that is easier to use than the CDN functionality in this plugin. However files will be cached "forever" and will not update if you update the local file. Files will need to be renamed to refresh them. The %3$sJetpack documentation%2$s explains more about this.', 'wp-super-cache' ),
@@ -310,6 +311,7 @@ function scossdl_off_options() {
 			); ?></strong></p><?php
 	}
 	if ( class_exists( 'Jetpack' ) && Jetpack::is_module_active( 'photon' ) ) {
+		echo '</div>'; // close wpsc-card
 		return;
 	}
 	?>
@@ -372,6 +374,15 @@ function scossdl_off_options() {
 		<input type="hidden" name="action" value="update_ossdl_off" />
 		<p class="submit"><input type="submit" class="button-primary" value="<?php esc_attr_e( 'Save Changes', 'wp-super-cache' ); ?>" /></p>
 		</form></p>
-		<p><?php _e( 'CDN functionality provided by <a href="https://wordpress.org/plugins/ossdl-cdn-off-linker/">OSSDL CDN Off Linker</a> by <a href="http://mark.ossdl.de/">Mark Kubacki</a>', 'wp-super-cache' ); ?></p>
+		<p>
+		<?php
+			printf(
+				/* Translators: placeholder is a link to OSSDL CDN Off Linker plugin on WordPress.org */
+				esc_html__( 'CDN functionality provided by %s by Mark Kubacki', 'wp-super-cache' ),
+				'<a href="https://wordpress.org/plugins/ossdl-cdn-off-linker/">OSSDL CDN Off Linker</a>'
+			);
+		?>
+		</p>
+		</div> <!-- Close .wpsc-card -->
 	<?php
 }

@@ -1,10 +1,10 @@
 === WP Super Cache ===
-Contributors: donncha, automattic, adnan007, mikemayhem3030, ppetrov2c, pyronaur, thingalon
+Contributors: donncha, automattic, adnan007, dilirity, mikemayhem3030, pyronaur, thingalon
 Tags: performance, caching, wp-cache, wp-super-cache, cache
-Requires at least: 5.9
-Requires PHP: 5.6
-Tested up to: 6.2
-Stable tag: 1.9.4
+Requires at least: 6.7
+Requires PHP: 7.2
+Tested up to: 6.9
+Stable tag: 3.0.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -268,17 +268,16 @@ Your theme is probably responsive which means it resizes the page to suit whatev
 
 
 == Changelog ==
-### 1.9.4-beta - 2023-03-02
+### 3.0.3 - 2025-11-11
 #### Added
-- Added a check to ensure preload cronjobs exist when updating preload settings.
-- Added new filter which controls cache clearing on post edit.
+- Tested up to WordPress 6.9.
 
 #### Changed
-- Updated contributors list.
+- Update package dependencies.
 
 #### Fixed
-- Fixed deprecation warnings on PHP 8.1+.
-- Fixed undefined PHP variable when trying to delete a protected folder.
+- Phan: Address PhanRedundantCondition, PhanRedundantArrayValuesCall, and PhanPluginRedundantAssignment violations.
+- Remove redundant code.
 
 --------
 
