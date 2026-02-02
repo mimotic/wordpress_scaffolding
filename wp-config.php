@@ -165,7 +165,7 @@ if (!defined('DISALLOW_FILE_EDIT')) {
 }
 
 define( 'WP_AUTO_UPDATE_CORE', true );
-header('X-Frame-Options: SAMEORIGIN');
+// Security headers moved to mu-scripts/scripts/securityHeaders.php
 
 /**
  * Allow WordPress to detect HTTPS when used behind a reverse proxy or a load balancer
