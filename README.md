@@ -1,15 +1,90 @@
 <p align="center"><a href="https://mimotic.com" target="_blank"><img src="https://mimotic.com/wp-content/uploads/2024/09/logo_mimotic.svg" width="200" alt="Mimotic Logo"></a></p>
 
-
-## About this WordPress Scaffolding 
+## About this WordPress Scaffolding
 
 This application is made with WordPress and elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Mimotic takes the pain out of development by easing common tasks used in many web projects.
 
 ❤️ love every bit
 
+---
+
+## Security Configuration
+
+This scaffolding includes security hardening via `mu-scripts/`. **By default, the most restrictive configuration is applied.** You can relax settings by adding variables to your `.env` file.
+
+### REST API Security
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `WP_REST_ALLOW_USERS` | `false` | Block `/wp/v2/users` endpoints to prevent username enumeration |
+| `WP_REST_PUBLIC_ACCESS` | `false` | Block all public REST API access (only logged-in users can access) |
+
+```bash
+# .env - Examples to RELAX security (not recommended)
+
+# Allow public access to user endpoints
+WP_REST_ALLOW_USERS=true
+
+# Allow public REST API access
+WP_REST_PUBLIC_ACCESS=true
+```
+
+**Whitelisted routes** (always accessible without login):
+- `/wp-json/contact-form-7/*`
+- `/wp-json/mcp/*`
+
+### SVG Upload
+
+| Variable | Value | Description |
+|----------|-------|-------------|
+| `WP_ALLOW_SVG` | not defined | SVG uploads **NOT allowed** |
+| `WP_ALLOW_SVG` | `false` | SVG uploads **NOT allowed** |
+| `WP_ALLOW_SVG` | `true` | SVG uploads allowed for **all users** |
+| `WP_ALLOW_SVG` | `admin` | SVG uploads allowed **only for administrators** |
+
+```bash
+# .env - Enable SVG uploads for admins only (recommended if needed)
+WP_ALLOW_SVG=admin
+```
+
+### Optional Security (disabled by default)
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `WP_JQUERY_MIGRATE` | `false` | Keep jQuery Migrate for legacy plugins |
+| `WP_SHOW_ASSET_VERSIONS` | `false` | Keep `?ver=` on CSS/JS URLs for cache busting |
+
+```bash
+# .env - Enable legacy compatibility (if needed)
+WP_JQUERY_MIGRATE=true
+WP_SHOW_ASSET_VERSIONS=true
+```
+
+### Always Active Security (no configuration needed)
+
+These protections are **always enabled** and cannot be disabled:
+
+| Protection | File | Description |
+|------------|------|-------------|
+| XML-RPC disabled | `xmlrpc.php` | Prevents brute force and DDoS attacks |
+| Pingback disabled | `pingback.php` | Removes X-Pingback headers |
+| Feeds disabled | `feeds.php` | Disables RSS/Atom feeds |
+| Version fingerprint removed | `removeMetaTags.php` | Removes WP version from meta tags |
+
+### Nginx Security Setup on Server
+- Link Mimotic nginx snippets inside your host config (adjust paths for the server user/site):
+  ```yml
+  # MIMOTIC NGINX COFIGS (DO NOT REMOVE!)
+  include /home/user/site/nginx/before/*;
+  [...]
+  # MIMOTIC NGINX COFIGS (DO NOT REMOVE!)
+  include /home/user/site/nginx/after/*;
+  ```
+---
+
+
+
 > ### Remember:
-> - Also read specific readme on theme folder
-> 
 > - Install composer and npm in docker way, please follow the instructions.
 > 
 > - Activate all plugins
@@ -71,16 +146,7 @@ Visit http://localhost/ once the stack is healthy.
 
 ## 2. Development
 
-### Theme Setup
-- Security helpers load via the mu-plugin `public/wp-content/mu-plugins/mimotic-security.php`, which requires `mu-scripts/init.php`. Keep both paths intact so security tweaks stay active even if the active theme changes.
-- Link Mimotic nginx snippets inside your host config (adjust paths for the server user/site):
-  ```yml
-  # MIMOTIC NGINX COFIGS (DO NOT REMOVE!)
-  include /home/user/site/nginx/before/*;
-  [...]
-  # MIMOTIC NGINX COFIGS (DO NOT REMOVE!)
-  include /home/user/site/nginx/after/*;
-  ```
+
 
 ### Common commands
 - Bootstrap everything in one go: `./sh/boot.sh`

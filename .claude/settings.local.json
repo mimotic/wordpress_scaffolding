@@ -7,7 +7,19 @@
       "Bash(cd:*)",
       "Bash(wp language core:*)",
       "Bash(wp site switch-language:*)",
-      "Bash(wp plugin:*)"
+      "Bash(wp plugin:*)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(composer require:*)",
+      "Bash(wp mcp-adapter:*)",
+      "Bash(wp help:*)",
+      "Bash(composer remove:*)",
+      "Bash(wp eval:*)",
+      "Bash(wp:*)",
+      "Bash(curl:*)",
+      "Bash(npm search:*)",
+      "WebFetch(domain:www.npmjs.com)",
+      "Bash(chmod:*)"
     ]
   }
 }

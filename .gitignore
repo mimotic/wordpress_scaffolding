@@ -110,3 +110,6 @@ public/wp-content/uploads/cache/
 
 #Backups
 public/wp-content/aiowps_backups
+
+#IA
+.claude

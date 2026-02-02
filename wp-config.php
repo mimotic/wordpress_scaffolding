@@ -80,8 +80,6 @@ if(dotEnvReader('SITE_ENVIROMENT') === 'production'){ // production server
     define( 'WP_DEBUG_LOG', __DIR__ . '/storage/logs/wp-production-debug.log' );
     define('WP_DEBUG_DISPLAY', false);
     define('SAVEQUERIES', false);
-    if (!defined('WP_CACHE')) {
-            }
     /* Compression */
     define( 'COMPRESS_CSS',        true );
     define( 'COMPRESS_SCRIPTS',    true );
@@ -109,26 +107,6 @@ if(dotEnvReader('SITE_ENVIROMENT') === 'production'){ // production server
     define('WP_DEBUG_DISPLAY', true);
     define('SAVEQUERIES', true);
 }
-/*
-|--------------------------------------------------------------------------
-| Add-on: SendGrid
-|--------------------------------------------------------------------------
-|
-| By default, WordPress uses PHP's mail function to send emails. We
-| strongly recommend using SendGrid to ensure messages are delivered to
-| both you and your users.
-|
-*/
-//define('SENDGRID_API_KEY', dotEnvReader('SENDGRID_API_KEY','') );
-//define('SENDGRID_KEY', dotEnvReader('SENDGRID_USERNAME','') );
-//define('SENDGRID_USERNAME', dotEnvReader('SENDGRID_USERNAME','') );
-//define('SENDGRID_PASSWORD', dotEnvReader('SENDGRID_PASSWORD',''));
-//define('SENDGRID_SEND_METHOD', dotEnvReader('SENDGRID_SEND_METHOD','api'));
-//
-//define('SENDGRID_FROM_NAME', dotEnvReader('SENDGRID_FROM_NAME',''));
-//define('SENDGRID_FROM_EMAIL', dotEnvReader('SENDGRID_FROM_EMAIL',''));
-//define('SENDGRID_REPLY_TO', dotEnvReader('SENDGRID_REPLY_TO',''));
-//define('SENDGRID_CATEGORIES', dotEnvReader('SENDGRID_CATEGORIES',''));
 
 /*
 |--------------------------------------------------------------------------
@@ -138,13 +116,14 @@ if(dotEnvReader('SITE_ENVIROMENT') === 'production'){ // production server
 |
 */
 // AWS CREDENTIALS
-//define( 'AWS_ACCESS_KEY_ID', '');
-//define( 'AWS_SECRET_ACCESS_KEY', '');
-//define( 'AS3CF_SETTINGS', serialize( array(
+//define('AWS_ACCESS_KEY_ID', '');
+//define('AWS_SECRET_ACCESS_KEY', '');
+//define('AS3CF_SETTINGS', serialize( array(
 //    'provider' => 'aws',
 //    'access-key-id' => dotEnvReader('AWS_ACCESS_KEY_ID', '*********'),
 //    'secret-access-key' => dotEnvReader('AWS_SECRET_ACCESS_KEY', '*********'),
 //) ) );
+
 /*
 |--------------------------------------------------------------------------
 | PERFORMANCE
@@ -156,6 +135,7 @@ define('DISABLE_WP_CRON', true);
 define('EMPTY_TRASH_DAYS', 0);
 define('WP_POST_REVISIONS', false);
 //define('WP_MEMORY_LIMIT', '256M');
+
 /*
 |--------------------------------------------------------------------------
 | MULTISITE
@@ -171,14 +151,6 @@ define('WP_POST_REVISIONS', false);
 //define('SITE_ID_CURRENT_SITE', dotEnvReader('SITE_ID_CURRENT_SITE', 0));
 //define('BLOG_ID_CURRENT_SITE', dotEnvReader('BLOG_ID_CURRENT_SITE', 0));
 /*
-|--------------------------------------------------------------------------
-| Iterms disable security
-|--------------------------------------------------------------------------
-|
-|
-*/
-// define('ITSEC_DISABLE_TWO_FACTOR', true); // access to config
-//define('ITSEC_DISABLE_MODULES', true); // remove two factor
 
 /*
 |--------------------------------------------------------------------------
