@@ -15,7 +15,7 @@ auth.json
 npm-debug.log
 yarn-error.log
 /.fleet
-/.idea
+.idea
 /.vscode
 
 ### macOS ###
@@ -70,13 +70,16 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+# logs
 *.log
 .log
+public/wp-content/debug.log
+
+#enviroment
 .env
 /vendor/
 .idea
 .idea/
-public/wp-content/debug.log
 
 # Eclipse
 .buildpath
@@ -110,6 +113,26 @@ public/wp-content/uploads/cache/
 
 #Backups
 public/wp-content/aiowps_backups
+
+# Uploads
+public/wp-content/uploads/
+
+# Dumps de base de datos
+*.sql
+*.sql.gz
+*.dump
+
+# Comprimidos
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.tar.bz2
+*.tar.xz
+*.gz
+*.bz2
+*.7z
+*.rar
 
 #IA
 .claude
