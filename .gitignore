@@ -114,9 +114,6 @@ public/wp-content/uploads/cache/
 #Backups
 public/wp-content/aiowps_backups
 
-# Uploads
-public/wp-content/uploads/
-
 # Dumps de base de datos
 *.sql
 *.sql.gz
