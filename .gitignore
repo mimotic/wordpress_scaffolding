@@ -133,3 +133,7 @@ public/wp-content/aiowps_backups
 
 #IA
 .claude
+
+# WP All Import / Export
+public/wp-content/uploads/wpallimport/
+public/wp-content/uploads/wpallexport/
