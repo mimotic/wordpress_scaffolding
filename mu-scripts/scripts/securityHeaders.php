@@ -13,9 +13,6 @@ add_action('send_headers', function () {
     // Prevent MIME type sniffing
     header('X-Content-Type-Options: nosniff');
 
-    // XSS Protection (legacy, but still useful for older browsers)
-    header('X-XSS-Protection: 1; mode=block');
-
     // Control referrer information sent with requests
     header('Referrer-Policy: strict-origin-when-cross-origin');
 
