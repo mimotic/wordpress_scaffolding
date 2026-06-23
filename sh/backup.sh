@@ -14,5 +14,6 @@ git config --global user.email bot@mimotic.com
 git config --global core.editor vi
 
 git add db.sql.gz -f
+db.sql
 git commit -m 'database server backup'
 git push
