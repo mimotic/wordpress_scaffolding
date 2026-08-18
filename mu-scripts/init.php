@@ -9,6 +9,7 @@ require __DIR__ . '/scripts/removeMetaTags.php'; // fingerprint
 require __DIR__ . '/scripts/restApi.php';
 require __DIR__ . '/scripts/securityHeaders.php';
 require __DIR__ . '/scripts/loginHardening.php';
+require __DIR__ . '/scripts/securityAlerts.php'; // intrusion detection / early warning
 require __DIR__ . '/scripts/disableComments.php';
 require __DIR__ . '/scripts/disableSearch.php';
 
