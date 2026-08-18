@@ -60,6 +60,62 @@ WP_JQUERY_MIGRATE=true
 WP_SHOW_ASSET_VERSIONS=true
 ```
 
+### Login Hardening (brute-force protection)
+
+Self-hosted replacement for *limit-login-attempts* (`loginHardening.php`). Locks
+out an IP after too many failed logins, hides which credential failed, blocks
+common bot usernames and throttles lost-password requests. **Enabled by default.**
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `WP_LOGIN_HARDENING` | `true` | Master switch for all login defences |
+| `WP_LOGIN_MAX_ATTEMPTS` | `5` | Failed attempts allowed before lockout |
+| `WP_LOGIN_LOCKOUT_MINUTES` | `30` | Lockout duration |
+| `WP_LOGIN_ATTEMPT_WINDOW` | `15` | Rolling window for counting attempts |
+| `WP_LOGIN_BLOCKED_USERS` | `admin,administrator,root,test,wp,wpadmin,user,demo,support` | Usernames rejected upfront |
+
+Manual unlock: `wp transient delete --all`.
+
+### Security Alerts / Intrusion Detection
+
+`securityAlerts.php` is a **dependency-free** early-warning layer (no plugins
+required). It watches high-signal events and, the moment one happens, writes to
+the PHP **error log** (`WP_DEBUG_LOG` path if defined) and sends a **throttled
+email** via `wp_mail`. **Enabled by default.**
+
+**What triggers an alert**
+- A user becomes **administrator** (created as admin, promoted, or super-admin) — the classic backdoor signature.
+- A **plugin is activated** or the **theme is switched**.
+- A **critical option** changes: `siteurl`, `home`, `admin_email`, `users_can_register`, `default_role`, `template`, `stylesheet`.
+- An **executable file is uploaded** (`.php/.phar/.phtml/…`, incl. double extensions like `photo.jpg.php`) — **blocked** and reported.
+- **Executable PHP is found under `wp-content/uploads`** (daily cron scan, event `mimotic_sec_scan_uploads`).
+- A **brute-force spike** (many failed logins in 5 min).
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `WP_SECURITY_ALERTS` | `true` | Master switch |
+| `WP_SECURITY_ALERT_EMAIL` | *(admin_email)* | Recipient address; falls back to the WP `admin_email` |
+| `WP_SECURITY_ALERT_THROTTLE` | `15` | Minutes to de-duplicate identical alerts |
+| `WP_SECURITY_BRUTEFORCE_THRESHOLD` | `20` | Failed logins per 5 min before alerting |
+| `WP_SECURITY_BLOCK_PHP_UPLOAD` | `true` | `true` blocks executable uploads, `false` alerts only |
+
+> The daily uploads scan runs via WP-Cron. On sites with `DISABLE_WP_CRON=true`
+> it fires when your scheduled `wp cron event run` task runs (`sh/cron.sh`).
+> All other alerts are real-time and do not depend on cron.
+
+### Content toggles
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `WP_DISABLE_COMMENTS` | `true` | Fully disables comments (form, admin UI, REST, `/wp-comments-post.php`) |
+| `WP_DISABLE_SEARCH` | `true` | Disables WP search and redirects `?s=` to home |
+
+### File modifications (production)
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `DISALLOW_FILE_MODS` | `true` | Blocks installing/updating/deleting plugins & themes from the panel and the code editor. Deploy updates via WP-CLI/git. Set `false` only in local dev. |
+
 ### Always Active Security (no configuration needed)
 
 These protections are **always enabled** and cannot be disabled:
