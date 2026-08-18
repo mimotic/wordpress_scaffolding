@@ -4,8 +4,8 @@
  *
  * Lightweight, dependency-free monitoring that emails (and logs) the moment a
  * high-signal security event happens, so a compromise is caught on day 1 rather
- * than discovered weeks later. Every alert is also written to error_log and, if
- * the Simple History plugin is active, recorded there too.
+ * than discovered weeks later. No plugin dependencies: every alert is written to
+ * the PHP error log and (throttled) emailed via wp_mail.
  *
  * What it watches (all high-signal, low-noise):
  *  1. A user becomes administrator (created as admin, promoted, or multisite
@@ -57,7 +57,7 @@ if (!function_exists('mimotic_sec_client_ip')) {
 }
 
 /**
- * Central dispatcher: log + (throttled) email + Simple History.
+ * Central dispatcher: log + (throttled) email.
  *
  * @param string $code    short machine code, e.g. 'admin_created'
  * @param string $subject human subject line
@@ -88,15 +88,10 @@ if (!function_exists('mimotic_sec_alert')) {
         }
         $body = implode("\n", $lines);
 
-        // 1) Always log.
+        // 1) Always log to the PHP error log (WP_DEBUG_LOG path if defined).
         error_log('[securityAlerts] ' . str_replace("\n", ' | ', $body));
 
-        // 2) Record in Simple History if present.
-        if (function_exists('apply_filters') && class_exists('SimpleLogger')) {
-            do_action('simple_history_log', '[Security] ' . $subject, $context, 'warning');
-        }
-
-        // 3) Throttled email (de-dup identical code+subject within the window).
+        // 2) Throttled email (de-dup identical code+subject within the window).
         if (function_exists('get_transient')) {
             $key = 'mimotic_sec_' . md5($code . '|' . $subject);
             if (get_transient($key)) {
