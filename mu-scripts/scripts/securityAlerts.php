@@ -217,6 +217,16 @@ add_action('mimotic_sec_scan_uploads', function () {
                 continue;
             }
             if (preg_match('/\.(php\d?|phtml|phar|pht|phps)$/i', $fn)) {
+                // Only flag files that actually contain PHP code. Empty stubs
+                // (e.g. an empty wpallimport/functions.php) and 0-byte files
+                // carry no executable payload, so they are not a threat.
+                if ($f->getSize() === 0) {
+                    continue;
+                }
+                $head = @file_get_contents($f->getPathname(), false, null, 0, 8192);
+                if ($head === false || strpos($head, '<?') === false) {
+                    continue;
+                }
                 $hits[] = str_replace($dir, '', $f->getPathname());
                 if (count($hits) >= 25) {
                     break;
