@@ -16,7 +16,7 @@ This scaffolding includes security hardening via `mu-scripts/`. **By default, th
 
 | Variable | Default | Description |
 |----------|---------|-------------|
-| `WP_REST_ALLOW_USERS` | `false` | Block `/wp/v2/users` endpoints to prevent username enumeration |
+| `WP_REST_ALLOW_USERS` | `false` | Block `/wp/v2/users` endpoints, author archives and the users sitemap to prevent username enumeration |
 | `WP_REST_PUBLIC_ACCESS` | `false` | Block all public REST API access (only logged-in users can access) |
 
 ```bash

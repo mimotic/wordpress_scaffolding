@@ -17,6 +17,7 @@ $restPublicAccess = dotEnvReader('WP_REST_PUBLIC_ACCESS', false);
  * LEVEL 1 - ALWAYS ACTIVE: Block user enumeration endpoints
  * This prevents username discovery via REST API
  * Blocked endpoints: /wp/v2/users, /wp/v2/users/*, search by user type
+ * Also removes author archives and the users sitemap (wp-sitemap-users-*.xml)
  */
 if (!$restAllowUsers) {
     // Remove users endpoint completely from REST API
@@ -37,6 +38,11 @@ if (!$restAllowUsers) {
             exit;
         }
     });
+
+    // Remove the users sitemap (wp-sitemap-users-1.xml lists author slugs)
+    add_filter('wp_sitemaps_add_provider', function ($provider, $name) {
+        return $name === 'users' ? false : $provider;
+    }, 10, 2);
 
     // Remove author name from oEmbed responses
     add_filter('oembed_response_data', function ($data) {
