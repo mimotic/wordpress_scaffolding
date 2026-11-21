@@ -137,3 +137,25 @@ public/wp-content/aiowps_backups
 # WP All Import / Export
 public/wp-content/uploads/wpallimport/
 public/wp-content/uploads/wpallexport/
+
+# Ruido que cambia solo y provocaba commits y despliegues automáticos (2026-11-21)
+# Wordfence
+public/wp-content/wflogs/
+# WP Super Cache (WP_CACHE y WPCACHEHOME van en wp-config.php)
+public/wp-content/advanced-cache.php
+public/wp-content/wp-cache-config.php
+# Temporales de actualización de WordPress
+public/wp-content/upgrade/
+public/wp-content/upgrade-temp-backup/
+# Cachés y logs de plugins
+public/wp-content/wpo-cache/
+public/wp-content/uploads/wpforms/cache/
+public/wp-content/uploads/rank-math/
+public/wp-content/uploads/smush/
+public/wp-content/uploads/unlimited_elements_cache/
+public/wp-content/languages/wpml/joblog/
+/storage/cache/
+# Copias de plugins de backup (las copias de la BD van en backups/ con sh/backup.sh)
+public/wp-content/updraft/
+public/wp-content/ai1wm-backups/
+*.wpress
