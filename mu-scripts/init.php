@@ -18,6 +18,7 @@ require __DIR__ . '/scripts/disableSearch.php';
  */
 require __DIR__ . '/scripts/staticGetVersions.php'; // fingerprint
 require __DIR__ . '/scripts/allowSvg.php';
+require __DIR__ . '/scripts/elementorPageCache.php'; // CSS de Elementor coherente con la caché de página
 
 /**
  * Remove Console Trace
